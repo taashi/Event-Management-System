@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<!--==================================================================
+//
+// Page: College Football Playoffs - Event Schedule Page
+// Description:
+//   This page contains information about events at the College 
+// Football Playoffs.
+// 
+//=================================================================-->
+
+<head>
+  
+  <title>College Football Playoffs Event Schedule Page, v5</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="author" content="Taashi Khurana"/>
+  <meta name="description" content="College Football Playoffs"/>
+  <meta http-equiv="Expires" content="-1">
+  <link rel="stylesheet" type="text/css" 
+    href="CollegeFootballPlayoffs-ExternalStyles.css">
+  
+  <!-- jQuery link -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+  </script>
+  
+  <!-- DataTables CSS and script links -->
+  <link rel="stylesheet" type="text/css" 
+    href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js">
+  </script>  
+
+</head>
+ 
+<body>
+
+  <!-- Header -->
+  <h1>College Football Playoffs - Event Schedule - v5</h1>
+  <hr>
+
+  <!-- Menu -->
+  <h2>
+    <a href="CollegeFootballPlayoffs-Main.html">
+      Main
+    </a>
+    &nbsp;&nbsp;
+    <a href="CollegeFootballPlayoffs-EventSchedule.html">
+      Event Schedule
+    </a>
+    &nbsp;&nbsp;
+    <a href="CollegeFootballPlayoffs-EventTickets.html">
+      Event Tickets
+    </a>
+  </h2>
+  <hr>
+  
+  <!-- Event Schedule page table -->
+  <table id="tableEvents" class="display">
+    <thead>
+      <tr>
+        <th>Event</th>
+        <th>Location</th>
+        <th>Date and Time</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <tr>
+        <td>Row 1 Data 1</td>
+        <td>Row 1 Data 2</td>
+        <td>Row 1 Data 3</td>
+      </tr>
+
+      <tr>
+        <td>Row 2 Data 1</td>
+        <td>Row 2 Data 2</td>
+        <td>Row 2 Data 3</td>
+      </tr>
+
+    </tbody>
+
+  </table>
+  
+  <!-- Event Schedule page script -->
+  <script type="text/javascript">
+    "use strict";
+    
+    var data =
+    [
+      [
+        "Playoff Fan Central",
+        "San Jose McEnery Convention Center",
+        "Friday, January 4 - Sunday, January 6, 2019"
+      ],
+      [
+        "AT&T Playoff Playlist Live!",
+        "Discovery Meadow Park",
+        "Friday, January 4 - Sunday, January 6, 2019"
+      ],
+      [
+        "Media Day",
+        "SAP Center",
+        "Saturday, January 5, 2019"
+      ],
+      [
+        "Extra Yard 5K",
+        "San Jose",
+        "Sunday, January 6, 2019"
+      ],
+      [
+        "Taste of the Championship",
+        "The Tech Museum of Innovation",
+        "Sunday, January 6, 2019"
+      ],
+      [
+        "Championship Tailgate",
+        "Great America Park/Levi's Stadium Parking Lot",
+        "Monday, January 7, 2019"
+      ]
+    ];
+        
+    $(document).ready(function()
+    {  
+      $('#tableEvents').DataTable(
+      {
+        data: data
+      });
+    });
+    
+  </script>
+
+  <!-- Footer -->
+  <hr>
+  <h4>
+    College Football Playoffs, 545 East John Carpenter Freeway, Irving, TX 75062&nbsp;&nbsp;
+    <a class="emailStyle" href="mailto:somebody@CollegeFootballPlayoffs.com">E-mail</a>&nbsp;&nbsp;
+    469-262-5200&nbsp;&nbsp;
+    Copyright&nbsp;&copy;&nbsp;2018&nbsp;&nbsp;
+    v5
+  </h4>
+  <hr>
+  
+</body>
+ 
+</html>

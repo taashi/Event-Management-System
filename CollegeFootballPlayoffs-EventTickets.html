@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+
+<!--==================================================================
+//
+// Page: College Football Playoffs - Event Tickets Page
+// Description:
+//   This page contains controls for selecting tickets for the College 
+// Football Playoffs.  The page sends total price data to the Event
+// Tickets Summary page.
+// 
+//=================================================================-->
+
+<head>
+  
+  <title>College Football Playoffs Event Tickets Page, v5</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="author" content="Taashi Khurana"/>
+  <meta name="description" content="College Football Playoffs"/>
+  <meta http-equiv="Expires" content="-1">
+  <link rel="stylesheet" type="text/css" 
+    href="CollegeFootballPlayoffs-ExternalStyles.css">
+  <script type="text/javascript">
+    "use strict";
+
+    // Declare arrays
+    var sections;
+    var rows;
+    //var saleID;
+    
+    //================================================================
+    // getNextID
+    //================================================================
+    // function getNextID()
+    // {
+          
+    //   // Attempt to get file from server
+    //   try
+    //   {
+      
+    //     // Create server request
+    //     var xhttp = new XMLHttpRequest();
+      
+    //     // Define callback function
+    //     xhttp.onreadystatechange = function() 
+    //     {
+    //       if (this.readyState == 4 && this.status == 200)
+    //       {
+    //         saleID = this.responseText;
+    //       }
+    //     };
+        
+    //     // Define command and send
+    //     xhttp.open("GET", "CollegeFootballPlayoffs-NextSaleID.php", false);
+    //     xhttp.send();
+        
+    //   }
+    //   catch (ex)
+    //   {
+    //     window.alert("Error" + "\nName: " + ex.name + 
+    //       "\nMessage: " + ex.message + "\nStack: " + ex.stack);
+    //   }
+
+    // }
+    
+    //================================================================
+    // getJSONsections
+    //================================================================
+    function getJSONsections()
+    {
+          
+      // Attempt to get file from server
+      try
+      {
+      
+        // Create server request
+        var xhttp = new XMLHttpRequest();
+      
+        // Define callback function
+        xhttp.onreadystatechange = function() 
+        {
+          if (this.readyState == 4 && this.status == 200)
+          {
+            sections = JSON.parse(this.responseText);
+          }
+        };
+        
+        // Define command and send
+        xhttp.open("GET", "JSONsections.txt", false);
+        xhttp.send();
+        
+      }
+      catch (ex)
+      {
+        window.alert("Error" + "\nName: " + ex.name + 
+          "\nMessage: " + ex.message + "\nStack: " + ex.stack);
+      }
+
+    }
+    
+    //================================================================
+    // getJSONrows
+    //================================================================
+    function getJSONrows()
+    {
+          
+      // Attempt to get file from server
+      try
+      {
+      
+        // Create server request
+        var xhttp = new XMLHttpRequest();
+      
+        // Define callback function
+        xhttp.onreadystatechange = function() 
+        {
+          if (this.readyState == 4 && this.status == 200)
+          {
+            rows = JSON.parse(this.responseText);
+          }
+        };
+        
+        // Define command and send
+        xhttp.open("GET", "JSONrows.txt", false);
+        xhttp.send();
+        
+      }
+      catch (ex)
+      {
+        window.alert("Error" + "\nName: " + ex.name + 
+          "\nMessage: " + ex.message + "\nStack: " + ex.stack);
+      }
+
+    }
+
+    //================================================================
+    // loadComboBoxes
+    //================================================================
+    function loadComboBoxes()
+    {
+    
+      // Declare variables
+      var opt;
+      var txt;
+
+      // Loop to add sections to combo box
+      for (var i = 0; i < sections.length; i++)
+      {
+        opt = document.createElement("option");
+        txt = document.createTextNode(sections[i]);
+        opt.appendChild(txt);                                
+        cmbSections.appendChild(opt);
+      }
+
+      // Loop to add rows to combo box
+      for (var i = 0; i < rows.length; i++)
+      {
+        opt = document.createElement("option");
+        txt = document.createTextNode(rows[i]);
+        opt.appendChild(txt);                                
+        cmbRows.appendChild(opt);
+      }
+      
+      // Initialize prices
+      updatePrices();
+      
+    }
+
+    //==================================================
+    // openEventTicketsSummary
+    //==================================================
+    function openEventTicketsSummary()
+    {
+
+      // Get next sale ID
+      //getNextID();
+      
+      // Open web page in same tab
+      //localStorage.setItem("saleID", saleID);
+      localStorage.setItem("tickets", tTickets.value);
+      localStorage.setItem("totalPrice", tTotalPrice.value);
+      open("CollegeFootballPlayoffs-EventTicketsSummary.html", "_self");
+      
+    }
+
+    //==================================================
+    // updatePrices
+    //==================================================
+    function updatePrices()
+    {
+    
+      // Declare variables
+      var price;
+    
+      // Test section number
+      if (cmbSections.value < 200)
+        price = 300;
+      else if (cmbSections.value < 300)
+        price = 200;
+      else
+        price = 100;
+    
+      // Test row number
+      if (cmbRows.value <= 5)
+        price = price + 75;
+      else if (cmbRows.value <= 10)
+        price = price + 50;
+      else
+        price = price + 25;
+        
+      // Update prices
+      tPricePerSeat.value = price.toFixed(2);
+      tTotalPrice.value = (price * tTickets.value).toFixed(2);
+      
+    }
+    
+  </script>
+
+</head>
+ 
+<body onload="getJSONsections();getJSONrows();loadComboBoxes()">
+
+  <!-- Header -->
+  <h1>College Football Playoffs - Event Tickets - v5</h1>
+  <hr>
+
+  <!-- Menu -->
+  <h2>
+    <a href="CollegeFootballPlayoffs-Main.html">
+      Main
+    </a>
+    &nbsp;&nbsp;
+    <a href="CollegeFootballPlayoffs-EventSchedule.html">
+      Event Schedule
+    </a>
+    &nbsp;&nbsp;
+    <a href="CollegeFootballPlayoffs-EventTickets.html">
+      Event Tickets
+    </a>
+  </h2>
+  <hr>
+
+  <div id="container">
+
+    <!-- Control panel -->
+    <div id="controlPanel">
+          
+      <label>Date:</label>
+      <input type="date" name="eventDate">
+      <br><br>
+
+      <label>Tickets (1-10):</label>
+      <input id="tTickets" type="number" value="1"
+        min="1" step="1" max="10" onchange="updatePrices()">
+      <br><br>
+          
+      <label>Section:</label>
+      <select id="cmbSections" onchange="updatePrices()">
+      </select>
+      <br><br>
+          
+      <label>Row:</label>
+      <select id="cmbRows" onchange="updatePrices()">
+      </select>
+      <br><br>
+          
+      <label>Price per seat ($):</label>
+      <input id="tPricePerSeat" type="text" value="(price)" readonly >
+      <br><br>
+          
+      <label>Total price ($):</label>
+      <input id="tTotalPrice" type="text" value="(total)" readonly >
+      <br><br>
+
+    </div>
+
+    <!-- Map panel -->
+    <div id="mapPanel">
+      <img
+        src="StadiumSeatingChart.png" alt="Image Missing!" 
+        style="width:847px; height:700px"
+      />
+    </div>
+
+  </div>
+
+  <button
+    class="formButtonStyle" 
+    type="button" 
+    onclick="openEventTicketsSummary()">
+    Event Tickets Summary
+  </button>
+
+  <!-- Footer -->
+  <hr>
+  <h4>
+    College Football Playoffs, 545 East John Carpenter Freeway, Irving, TX 75062&nbsp;&nbsp;
+    <a class="emailStyle" href="mailto:somebody@CollegeFootballPlayoffs.com">E-mail</a>&nbsp;&nbsp;
+    469-262-5200&nbsp;&nbsp;
+    Copyright&nbsp;&copy;&nbsp;2018&nbsp;&nbsp;
+    v5
+  </h4>
+  <hr>
+  
+</body>
+ 
+</html>

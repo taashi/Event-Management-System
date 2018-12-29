@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+<!--==================================================================
+//
+// Web site:   College Football Playoffs Web Site
+// Web page:   Main Page
+// Course:     CSC 5750
+// Homework:   5
+// Author:     Taashi Khurana
+// Date:       1 December 2018
+// Description:
+//   This web site contains information about the 2019 College 
+// Football Playoffs.  The Main page contains general information 
+// about the event.  The Event Schedule page shows a detailed schedule
+// for the event.  The Event Tickets page contains controls for 
+// selecting tickets for the event.  The Event Tickets Summary page 
+// contains a tickets form for the event.
+//
+//=================================================================-->
+
+<head>
+  
+  <title>College Football Playoffs Main Page, v5</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="author" content="Taashi Khurana"/>
+  <meta name="description" content="College Football Playoffs"/>
+  <meta http-equiv="Expires" content="-1">
+  <link rel="stylesheet" type="text/css" 
+    href="CollegeFootballPlayoffs-ExternalStyles.css">
+
+  <!-- Leaflet CSS and script links -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+    integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+    crossorigin=""/>  
+  <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+    integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+    crossorigin="">
+  </script>
+    
+</head>
+ 
+<body>
+
+  <!-- Header -->
+  <h1>College Football Playoffs - Main-v5</h1>
+  <hr>
+
+  <!-- Menu -->
+  <h2>
+    <a href="CollegeFootballPlayoffs-Main.html">
+      Main
+    </a>
+    &nbsp;&nbsp;
+    <a href="CollegeFootballPlayoffs-EventSchedule.html">
+      Event Schedule
+    </a>
+    &nbsp;&nbsp;
+    <a href="CollegeFootballPlayoffs-EventTickets.html">
+      Event Tickets
+    </a>
+  </h2>
+  <hr>
+
+  <!-- Main page table -->
+  <table style="width:100%">
+    
+    <!-- Column specs -->
+    <colgroup>
+      <col width="50%">
+      <col width="50%">
+    </colgroup>
+    
+    <!-- Rows and columns -->
+    <tbody>
+      <tr>
+
+        <!-- Event purpose -->
+        <td>
+          <h3>What's this all about?</h3>
+          <div>
+            The College Football Playoffs determine who is this year's college football national champion.
+            The playoffs consist of two semifinal games:
+            <i>The Capital One Orange Bowl</i> and
+            <i>The Goodyear Cotton Bowl</i>.
+            The winners of those two games then meet one week later in the national championship game.
+          </div>
+        </td>
+
+        <!-- Event dates and times -->
+        <td>
+          <h3>Event dates and times</h3>
+          <ul>
+            <li>Capital One Orange Bowl, 29 December 2018, 2pm EST</li>
+            <li>Goodyear Cotton Bowl, 29 December 2018, 5pm EST</li>
+            <li>National Championship, 7 January 2019, 8pm EST</li>
+          </ul>
+        </td>
+
+      </tr>
+      
+      <tr>
+
+        <!-- Featured event -->
+        <td>
+          <h3>Featured event</h3>
+          <div>
+            The national championship game on 7 January 2019.
+            The Alabama Crimson Tide (shown below) were the 2018 national champions.
+          </div>
+          <img src="2018NationalChamps.jpg" alt="Image Missing!" 
+            width="750" height="480" 
+          />
+        </td>
+
+        <!-- Event location -->
+        <td>
+          <h3>Event location</h3>
+          <div>
+            The national championship game will take place in Levi’s Stadium, Santa Clara, CA
+          </div>
+          
+          <!-- Google Maps map -->
+<!--           <div id="mapGoogle" style="width:700px; height:400px">
+          </div>
+          <br><br>
+ -->          
+          <!-- Google Maps map script -->
+<!--           <script type="text/javascript">
+            function generateMap()
+            {
+              var myCenter = new google.maps.LatLng(37.40, -121.97);
+              var mapCanvas = document.getElementById("mapGoogle");
+              var mapOptions = {center: myCenter, zoom: 12};
+              var map = new google.maps.Map(mapCanvas, mapOptions);
+              var marker = new google.maps.Marker({position:myCenter});
+              marker.setMap(map);
+            } 
+          </script>
+          <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4J3uLzAH39K20qEU2KbGNsTql-yW3VHw&callback=generateMap">
+          </script>
+ -->          
+          <!-- Leaflet map -->
+          <div id="mapLeaflet" style="width:700px; height:400px">
+          </div>
+          
+          <!-- Leaflet map script -->
+          <script type="text/javascript">
+            var mymap = L.map('mapLeaflet').setView([37.40, -121.97], 12);
+            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}',
+            {
+              id: 'mapbox.streets',
+              accessToken: 'pk.eyJ1IjoiZGFubzg4IiwiYSI6ImNqa3U4ZXc5ZDBkdDMzcHBhcWV3N3BzeTQifQ.sItKEF4s6Sxi-Ltzdd6Zow'
+            }).addTo(mymap);
+            var marker = L.marker([37.40, -121.97]).addTo(mymap);            
+          </script>
+          
+        </td>
+      </tr>
+    <tbody>
+
+  </table>
+
+  <!-- Footer -->
+  <hr>
+  <h4>
+    College Football Playoffs, 545 East John Carpenter Freeway, Irving, TX 75062&nbsp;&nbsp;
+    <a class="emailStyle" href="mailto:somebody@CollegeFootballPlayoffs.com">E-mail</a>&nbsp;&nbsp;
+    469-262-5200&nbsp;&nbsp;
+    Copyright&nbsp;&copy;&nbsp;2018&nbsp;&nbsp;
+    v5
+  </h4>
+  <hr>
+  
+</body>
+ 
+</html>

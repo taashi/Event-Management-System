@@ -1,0 +1,223 @@
+/*==========================================================
+
+ Title: College Football Playoffs - External Styles
+ Description:
+   This CSS page contains CSS external styles for the web 
+ site.  The color scheme used is composed of four colors:
+   #e6af4b - gold like
+   #e05038 - orange like
+   #f2cbbc - peach like
+   #334431 - dark green like
+
+==========================================================*/
+
+/*==========================================================
+ Body style
+==========================================================*/
+body
+{
+  background-color:#e6af4b;
+  background-image:url(CFPlogo.png); 
+  background-position:top left;
+  background-repeat:no-repeat;
+  background-size:70px 70px;
+  font-family:verdana, georgia;
+  font-size:28px;
+  font-weight:bold;
+}
+
+/*==========================================================
+ Heading styles
+==========================================================*/
+h1
+{
+  font-size:60px;
+  text-align:center;
+}
+h2
+{
+  background-color:#334431;
+  color:white;
+  font-size:30px;
+  padding:20px;
+  text-align:center;
+}
+h3
+{
+  background-color:#e05038;
+  color:white;
+  font-size:28px;
+  padding:20px;
+  text-align:center;
+}
+h4
+{
+  background-color:#f2cbbc;
+  color:black;
+  font-size:26px;
+  padding:20px;
+  text-align:center;
+}
+
+/*==========================================================
+ Anchor style
+==========================================================*/
+a
+{
+  color:white;
+  padding:20px;
+}
+
+/*==========================================================
+ div style
+==========================================================*/
+div, ul
+{
+  padding:20px;
+}
+
+/*==========================================================
+ Input and select styles
+==========================================================*/
+    
+input, select
+{
+  background-color:white;
+  font-size:32px;
+  font-weight:bold;
+  padding:10px;
+  width:400px;
+}
+
+/*==========================================================
+ Label style
+==========================================================*/
+    
+label
+{
+  display:inline-block;
+  font-size:28px;
+  width:400px;
+}
+
+/*==========================================================
+ td styles
+==========================================================*/
+td
+{
+  padding-left:20px;
+  padding-right:20px;
+  vertical-align:top;
+}
+
+#salesTable td
+{
+  text-align:right;
+}
+
+/*==========================================================
+ th style
+==========================================================*/
+th
+{
+  background-color:#e05038;
+  color:white;
+}
+
+/*==========================================================
+ tr styles
+==========================================================*/
+
+#salesTable tr:nth-child(odd)
+{
+  background-color:whitesmoke;
+}
+
+#salesTable tr:nth-child(even)
+{
+  background-color:white;
+}
+
+#salesTable tr:hover
+{
+  background-color:gainsboro;
+}
+
+/*==========================================================
+ ID styles
+==========================================================*/
+
+#container
+{
+  margin:0px auto;
+  width:2300px;
+}
+
+#controlPanel
+{
+  background-color:#f2cbbc;
+  float:left;
+  height:700px;
+  margin:4px;
+  padding:50px;
+  width:1000px;
+}
+
+#mapPanel
+{
+  background-color:#f2cbbc;
+  float:right;
+  height:700px;
+  margin:4px;
+  padding:50px;
+  width:1000px;
+}
+
+/*==========================================================
+ Class styles
+==========================================================*/
+
+.emailStyle
+{
+  color:black;
+}
+.fieldsetStyle
+{
+  background-color:white;
+  padding-left:40px;
+  width:400px;
+}
+.formButtonStyle
+{
+  background-color:#334431;
+  color:white;
+  font-size:30px;
+  font-weight:bold;
+  margin:20px;
+  padding:20px;
+  width:400px;
+}
+.radioButtonStyle
+{
+  width:100px;
+}
+
+/*==========================================================
+ Pseudo classes
+==========================================================*/
+a:hover
+{
+  background-color:#e05038;
+  color:white;
+}
+
+.formButtonStyle:hover
+{
+  background-color:#e05038;
+}
+
+input:focus
+{
+  background-color:#e05038;
+  color:white;
+}

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+
+<!--==================================================================
+//
+// Page: College Football Playoffs - Event Tickets Summary Page
+// Description:
+//   This page contains a tickets form for the College Football 
+// Playoffs.  The page receives total price data from the Event
+// Tickets page.
+// 
+//=================================================================-->
+
+<head>
+  
+  <title>College Football Playoffs Event Tickets Summary Page, v5</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="author" content="Taashi Khurana"/>
+  <meta name="description" content="College Football Playoffs"/>
+  <meta http-equiv="Expires" content="-1">
+  <link rel="stylesheet" type="text/css" 
+    href="CollegeFootballPlayoffs-ExternalStyles.css">
+  <script type="text/javascript">
+    "use strict";
+
+    //================================================================
+    // loadSale
+    //================================================================
+    function loadSale()
+    {
+      //tSaleID.value = localStorage.getItem("saleID");
+      tTickets.value = localStorage.getItem("tickets");
+      tTotalPrice.value = localStorage.getItem("totalPrice");
+    }
+    
+    //==================================================
+    // sendSale
+    //==================================================
+    function sendSale()
+    {
+    var xhttp;
+    var nooftickets = NumberOfTickets.value;
+    var totalprice = TotalPrice.value;
+      // Test if city blank
+      if (nooftickets.length == 0)
+        lStatus.innerHTML = "Error: nooftickets cannot be blank."
+      else
+      {
+        // Try to add sales
+        try
+        {
+          xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() 
+          {
+            if (this.readyState == 4 && this.status == 200)
+            {
+              lStatus.innerHTML = "Sales added.";
+              lStatus.innerHTML = this.responseText;
+            } 
+          };
+          xhttp.open(
+            "GET", 
+            "Sales-DatabaseInterface.php?request=add&nooftickets=" + nooftickets +"&totalprice=" + totalprice, 
+            false);
+          xhttp.send();
+        }
+        catch (ex)
+        {
+          window.alert("Error" + "\nName: " + ex.name + 
+            "\nMessage: " + ex.message + "\nStack: " + ex.stack);
+        }
+      
+      }
+      
+    }
+    //==================================================
+    // showSales
+    //==================================================
+    function showSales()
+    {
+          
+      // Attempt to get file from server
+      try
+      {
+      
+        // Create server request
+        var xhttp = new XMLHttpRequest();
+      
+        // Define callback function
+        xhttp.onreadystatechange = function() 
+        {
+          if (this.readyState == 4 && this.status == 200)
+          {
+            lStatus.innerHTML = "Sales listed.";
+            tbSales.innerHTML = this.responseText;
+          }
+        };
+        
+        // Define command and send
+        xhttp.open(
+          "GET", 
+          "Sales-DatabaseInterface.php?request=list",
+          false);
+        xhttp.send();
+        
+      }
+      catch (ex)
+      {
+        window.alert("Error" + "\nName: " + ex.name + 
+          "\nMessage: " + ex.message + "\nStack: " + ex.stack);
+      }
+
+    }
+    function DeleteSales()
+    {
+      // Declare variables
+      var xhttp;
+      var ID = SaleID.value;
+      
+      // Test if city blank
+      if (ID.length == 0)
+        lStatus.innerHTML = "Error: ID cannot be blank."
+      else
+      {
+    
+        // Try to delete city
+        try
+        {
+          xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() 
+          {
+            if (this.readyState == 4 && this.status == 200)
+            {
+              lStatus.innerHTML = "Sales deleeted.";
+              lStatus.innerHTML = this.responseText;
+            } 
+          };
+          xhttp.open(
+            "GET", 
+            "Sales-DatabaseInterface.php?request=delete&id=" + ID, 
+            false);
+          xhttp.send();
+        }
+        catch (ex)
+        {
+          window.alert("Error" + "\nName: " + ex.name + 
+            "\nMessage: " + ex.message + "\nStack: " + ex.stack);
+        }
+      
+      }
+      
+    }
+    function UpdateSales()
+    {
+    
+      // Declare variables
+      var xhttp;
+      var ID = SaleID.value;
+      var nooftickets = NumberOfTickets.value;
+      var totalprice = TotalPrice.value;
+      
+      // Test if nooftickets is blank
+      if (ID.length == 0 ||  totalprice.value == 0)
+        lStatus.innerHTML = "Error: ID cannot be blank."
+      else if (nooftickets.length == 0)
+        lStatus.innerHTML = "Error: nooftickets cannot be blank."
+      else
+      {
+    
+        // Try to update sales
+        try
+        {
+          xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() 
+          {
+            if (this.readyState == 4 && this.status == 200)
+            {
+              lStatus.innerHTML = "Sales updated.";
+              lStatus.innerHTML = this.responseText;
+            } 
+          };
+          xhttp.open(
+            "GET", 
+            "Sales-DatabaseInterface.php?request=update&id=" + ID + "&nooftickets=" + nooftickets +"&totalprice=" + totalprice, 
+            false);
+          xhttp.send();
+        }
+        catch (ex)
+        {
+          window.alert("Error" + "\nName: " + ex.name + 
+            "\nMessage: " + ex.message + "\nStack: " + ex.stack);
+        }
+      
+      }
+      
+    }
+
+  </script>
+  
+</head>
+ 
+<body onload="loadSale()">
+
+  <!-- Header -->
+  <h1>College Football Playoffs - Event Tickets Summary - v5</h1>
+  <hr>
+
+  <!-- Menu -->
+  <h2>
+    <a href="CollegeFootballPlayoffs-Main.html">
+      Main
+    </a>
+    &nbsp;&nbsp;
+    <a href="CollegeFootballPlayoffs-EventSchedule.html">
+      Event Schedule
+    </a>
+    &nbsp;&nbsp;
+    <a href="CollegeFootballPlayoffs-EventTickets.html">
+      Event Tickets
+    </a>
+  </h2>
+  <hr>
+
+  <!-- Sale -->
+    
+ 
+
+  <label>Title: </label>
+  <select name="title">
+    <option>Dr</option>
+    <option selected>Mr</option>
+    <option>Ms</option>
+  </select> 
+  <br><br>
+  
+  <label>First name: </label>
+  <input type="text" name="firstName">
+  <br><br>
+  
+  <label>Last name: </label>
+  <input type="text" name="lastName">
+  <br><br>
+  
+  <label>Number of tickets: </label>
+  <input id="tTickets" type="text" value="(tickets)" readonly >
+  <br><br>
+        
+  <label>Total price ($):</label>
+  <input id="tTotalPrice" type="text" value="(total)" readonly >
+  <br><br>
+
+  <label>Delivery format:</label>
+  <br><br>
+  <fieldset class="fieldsetStyle">
+    <input type="radio" class="radioButtonStyle" name="deliveryFormat" value="Email"> E-mail<br>
+    <input type="radio" class="radioButtonStyle" name="deliveryFormat" value="SnailMail"> Snail mail<br>
+  </fieldset>
+  <br>
+  
+  <label>E-mail address: </label>
+  <input type="email" name="emailAddress">
+  <br><br>
+  <label>Snail mail address: </label>
+  <input type="text" name="snailAddress">
+  <br><br>
+  <label>Sale Id:</label>
+  <input id="SaleID" type="text"/>
+  <br><br>
+  <label>Number of Tickets:</label>
+  <input id="NumberOfTickets" type="text"/>
+  <br><br>
+  <label>Total Price:</label>
+  <input id="TotalPrice" type="text"/>
+<br><br>
+  
+  <button
+    class="formButtonStyle" 
+    type="button" 
+    onclick="sendSale()">
+    Add Sale
+  </button>
+  <button class="formButtonStyle"  type="button" onclick="DeleteSales()">Delete Sales</button>
+  <button class="formButtonStyle" type="button" onclick="UpdateSales()">Update Sales</button>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  
+  <button
+    class="formButtonStyle" 
+    type="button" 
+    onclick="showSales()">
+    List Sales
+  </button>
+  <hr>
+  <label id="lStatus" class="response">(status)</label>
+  <br><br>
+
+  <!-- Sales table -->
+  
+  <h1>College Football Playoffs - Sales Table</h1>
+ 
+  <table id="salesTable" style="border:2px; width:100%">
+    
+    <!-- Column specs -->
+    <colgroup>
+      <col width="33%">
+      <col width="33%">
+      <col width="34%">
+    </colgroup>
+    
+    <!-- Column headers -->
+    <thead>
+      <tr>
+        <th>
+          ID
+        </th>
+        <th>
+          Number of Tickets
+        </th>
+        <th>
+          Total Price ($)
+        </th>
+      </tr>
+    </thead>
+    
+    <!-- Rows and columns -->
+    <tbody id="tbSales">
+    <tbody>
+
+  </table>
+
+  <!-- Footer -->
+  <hr>
+  <h4>
+    College Football Playoffs, 545 East John Carpenter Freeway, Irving, TX 75062&nbsp;&nbsp;
+    <a class="emailStyle" href="mailto:somebody@CollegeFootballPlayoffs.com">E-mail</a>&nbsp;&nbsp;
+    469-262-5200&nbsp;&nbsp;
+    Copyright&nbsp;&copy;&nbsp;2018&nbsp;&nbsp;
+    v5
+  </h4>
+  <hr>
+  
+</body>
+ 
+</html>
